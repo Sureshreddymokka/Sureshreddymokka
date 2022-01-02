@@ -39,9 +39,11 @@
         <div class="col">
              <br />
         </div>
-    </div>
-    
-     
+    </div>  <div class="row">
+        <div class="col-sm-6">
+   
+ 
+      </div> </div>
     <div class="row">
         <div class="col-sm-6">
             <table class="table table-bordered" style="border: 1px solid #800000; background-color: #d9edf7;">
@@ -118,9 +120,69 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div></div>
+        <div class="row">
         <div class="col-sm-6">
-           
+         <center><span style="color: #333399; font-size: medium"><strong>View Appointments</strong></span>
+</center>
+           <center><span style="color: #333399; font-size: medium"><strong>
+<asp:GridView ID="GridView2" runat="server" BackColor="White" DataKeyNames="id"
+        BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" 
+        EnableModelValidation="True" AutoGenerateColumns="False" Width="600px" 
+                   Font-Bold="False">
+        <Columns>     <asp:TemplateField HeaderText="Slno">
+        <ItemTemplate>
+             <%#Container.DataItemIndex+1 %>
+        </ItemTemplate>
+    </asp:TemplateField>
+
+            <asp:BoundField DataField="id" Visible="False" />
+            <asp:BoundField DataField="dt_booked" HeaderText="Date Booked" />
+            <asp:BoundField DataField="slottime" HeaderText="Slot time" />
+            <asp:BoundField DataField="Name" HeaderText="Doctor Name" />
+            <asp:BoundField DataField="Mobile" HeaderText="Mobile" />
+            <asp:BoundField DataField="Email" HeaderText="Email" />
+              
+        </Columns>
+        <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
+        <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />
+        <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" HorizontalAlign="Center" />
+        <RowStyle BackColor="White" ForeColor="#330099" />
+        <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" />
+    </asp:GridView>
+    </div></div>
+        <div class="row">
+        <div class="col-sm-6">
+    <center><span style="color: #333399; font-size: medium"><strong>Cancelled Appointments</strong></span>
+
+    
+<asp:GridView ID="GridView1" runat="server" BackColor="White" DataKeyNames="id"
+        BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" 
+        EnableModelValidation="True" AutoGenerateColumns="False" 
+        onrowdeleting="GridView1_RowDeleting" Width="600px" Font-Bold="False">
+        <Columns>     <asp:TemplateField HeaderText="Slno">
+        <ItemTemplate>
+             <%#Container.DataItemIndex+1 %>
+        </ItemTemplate>
+    </asp:TemplateField>
+
+            <asp:BoundField DataField="id" Visible="False" />
+            <asp:BoundField DataField="dt_booked" HeaderText="Date Booked" />
+            <asp:BoundField DataField="slottime" HeaderText="Slot time" />
+            <asp:BoundField DataField="Name" HeaderText="Doctor Name" />
+            <asp:BoundField DataField="Mobile" HeaderText="Mobile" />
+            <asp:BoundField DataField="Email" HeaderText="Email" />
+              
+             
+        </Columns>
+        <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
+        <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />
+        <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" HorizontalAlign="Center" />
+        <RowStyle BackColor="White" ForeColor="#330099" />
+        <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" />
+    </asp:GridView></center>
+ 
         </div>
     </div>
+     </strong></span>
      </asp:Content>

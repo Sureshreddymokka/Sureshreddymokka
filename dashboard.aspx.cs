@@ -8,9 +8,7 @@ using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-using MLM.BRFactory;
-using MLM.Entities;
-using MLM.Common;
+ 
 
 public partial class dashboard : System.Web.UI.Page
 {
@@ -24,7 +22,56 @@ public partial class dashboard : System.Web.UI.Page
     int l1 = 0, ll2 = 0, l3 = 0;
     String u1 = "", u2 = "", u3 = "", u4 = "", u5 = "", u6 = "", u7 = "", u8 = "";
     string jointype, reduserid, redside;
+    public void bindv()
+    {
+        string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        try
+        {
+            SqlConnection con1 = new SqlConnection(constr);
+            con1.Open();
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT top 1  t.id,CONVERT(VARCHAR(20),dt_booked,105) as dt_booked,Name,Mobile,Email,slottime  FROM  tbl_bookedslots t,tbl_doctors d where t.doctor_id=d.id and t.status=1 and patent_id=" + Session["id"].ToString() + "  order by id desc", con1);
 
+            using (DataTable dt = new DataTable())
+            {
+                dap.Fill(dt);
+                GridView2.DataSource = dt;
+                GridView2.DataBind();
+            }
+
+            con1.Close();
+
+        }
+        catch (Exception ex)
+        {
+            // Label1.Text = ex.Message;
+        }
+
+    }
+    public void bindd()
+    {
+        string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        try
+        {
+            SqlConnection con1 = new SqlConnection(constr);
+            con1.Open();
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT  top 1  t.id,CONVERT(VARCHAR(20),dt_booked,105) as dt_booked,Name,Mobile,Email,slottime  FROM  tbl_bookedslots t,tbl_doctors d where t.doctor_id=d.id and t.status=0 and patent_id=" + Session["id"].ToString() + " order by id desc", con1);
+
+            using (DataTable dt = new DataTable())
+            {
+                dap.Fill(dt);
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+
+            con1.Close();
+
+        }
+        catch (Exception ex)
+        {
+            // Label1.Text = ex.Message;
+        }
+
+    }
     public void VerifyLogin(short loginType)
     {
         if (loginType == 1)
@@ -57,19 +104,16 @@ public partial class dashboard : System.Web.UI.Page
 
 
             VerifyLogin(1);
-
-            OperationResultSet objRS = null;
-            OperationResultSet objOR = new OperationResultSet();
-            BRFactory objFactory = new BRFactory();
-            IBRFactory obj = objFactory.CreateBR(Common.MEMBER);
-            try
-            {
+                    bindd();
+              bindv();
+            
+            
                 try
                 {
                     SqlConnection con = new SqlConnection(constr);
                     con.Open();
-
-                    SqlCommand cmd1 = new SqlCommand("select * from  tbl_users  where id=" +  Session["id"].ToString()+ " and status=1");//)   VALUES          ('" + txtCustomer.Text + "','" + txtMobileNo.Text + "','" + txtSponsor.Text + "','" + ddlState.SelectedItem.Text + "','" + defaultLoginPassword + "',getdate(),1)", con);
+                    string str = "select * from  tbl_users  where id=" + Session["id"].ToString() + " and status=1";
+                    SqlCommand cmd1 = new SqlCommand(str);//)   VALUES          ('" + txtCustomer.Text + "','" + txtMobileNo.Text + "','" + txtSponsor.Text + "','" + ddlState.SelectedItem.Text + "','" + defaultLoginPassword + "',getdate(),1)", con);
                     cmd1.Connection = con;
                     SqlDataReader dr1 = cmd1.ExecuteReader();
                     string id = "", pwd = "", mobile = "", email = "", Name = "",dt="",State="",city="";
@@ -88,30 +132,9 @@ public partial class dashboard : System.Web.UI.Page
                 }
                 catch (Exception ex)
                 {
-                    //Label1.Text = ex.Message;
+                    lblMemberID.Text = ex.Message;
                 } 
-                //if (objOR.IsSuccessful)
-                //{
-                //    member = (MemberEntity)objOR.ResultSet;
-                //    lblMemberID.Text = member.ApplicationId.ToString();
-                //    lblMemdberName.Text = member.Name.ToString();
-                //    lblDateofJoining.Text = member.JoiningDate.ToShortDateString();
-                //    lblSponsorID.Text = member.SponsorId.ToString();
-                //    lblSponsorName.Text = member.SponsorName.ToString();
-                //    lblMemdberName0.Text = member.MobileNo;
-                //    lblBplusActivated.Text = Convert.ToString(member.BinaryStatus) != "" && Convert.ToString(member.BinaryStatus) != "" ? "Activated" : "";
-                //    // lblDateOfActivation.Text = Convert.ToString(member.BPlusActiveDate) != "" ? Convert.ToString(member.BPlusActiveDate) : "";
-
-
-                //}
-                //else
-                //{
-                //    //lblMessage.Text = objOR.Error;
-                //}
-            }
-            catch (Exception ex)
-            {
-            }
+                 
             finally
             {
                 
@@ -128,7 +151,11 @@ public partial class dashboard : System.Web.UI.Page
       
     }
         ////Circle
-     }
+    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+
+    }
+}
    
 
  

@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Globalization;
+using System.Configuration;
+public partial class booknow : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+    String id = Request["ID"].ToString();
+    Label1.Text = "id=" + id + "<br>date: " + Session["dt"].ToString();
+
+    string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+    string defaultLoginPassword = ConfigurationManager.AppSettings["DefaultLoginPassword"].ToString();
+    try
+    {
+        SqlConnection con = new SqlConnection(constr);
+        con.Open();
+
+        SqlCommand cmd1 = new SqlCommand("INSERT INTO tbl_bookedslots(slot,dt_booked,doctor_id,patent_id,status)   VALUES (" + id + ",'" + Session["dt"].ToString() + "'," + Session["did"].ToString() + "," + Session["id"].ToString()+ ",1)", con);
+        cmd1.ExecuteNonQuery();
+        Label1.Text = "<font color=green><b>Record Updated</b></font>";
+        //Response.Redirect("Confirm2.aspx");
+        con.Dispose();
+    }
+    catch (Exception ex)
+    {
+        Label1.Text = ex.Message;
+    }
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        String id = Request["ID"].ToString();
+        Response.Redirect("bookAppointment.aspx?pid=" + Session["id"].ToString() + "&id=" + Session["did"].ToString() + "&dt=" + Session["dt"].ToString());
+    }
+}

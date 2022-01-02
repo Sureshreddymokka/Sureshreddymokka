@@ -91,7 +91,7 @@
           </a>
         </li>
           <li class="nav-item active">
-          <a class="nav-link" href="BookAppointment.aspx">
+          <a class="nav-link" href="SearchDoctors.aspx">
             <i class="fas fa-fw fa-file-alt"></i>
             <span>Book Appointment</span>
           </a>

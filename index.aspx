@@ -156,7 +156,7 @@
                             <li><a href="#about">About Us</a></li>
                             <li><a href="#Service">Services</a></li>
                             <li><a href="#Opportunity">Our Doctors</a></li>
- <li><a href="#Terms">Testimonnials</a></li>
+
                              
                             
                             <li><a href="#Contact">Contact</a></li>

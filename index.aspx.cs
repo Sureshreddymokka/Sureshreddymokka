@@ -69,6 +69,7 @@ public partial class index : System.Web.UI.Page
         }
         else
         {
+            decimal sm = 0;
             Session["LoginType"] = "user";
             string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
@@ -81,7 +82,7 @@ public partial class index : System.Web.UI.Page
                     cmd.Connection = con;
                     SqlDataReader dr;
                     dr = cmd.ExecuteReader();
-                    decimal sm = 0;
+                   
                     while (dr.Read())
                     {
                         if (dr[0] != DBNull.Value)
@@ -95,6 +96,8 @@ public partial class index : System.Web.UI.Page
             }
             if (fl == 9)//txtPassword.Text.ToLower() == ConfigurationManager.AppSettings["AdminPassword"].ToString().ToLower() || txtPassword.Text.ToLower() == "357159")
             {
+                Session["id"] = txtUsername.Text; ;
+                Session["pwd"] = txtPassword.Text;
 
                 Response.Redirect("dashboard.aspx");
                 //Response.Redirect("admin/ValidateOTP.aspx");
