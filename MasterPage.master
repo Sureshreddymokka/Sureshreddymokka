@@ -1,0 +1,344 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="ViewRender.MasterViewRender" %>
+<%@ Register Src="Controls/TitlesDisplay.ascx" TagName="TitlesDisplay" TagPrefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script runat="server">
+
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+        Session["LoginType"] = null;
+        Session["MemberEntity"] = null;
+        Session.Abandon();
+        Session.Clear();
+
+         
+        Response.Redirect("~/index.aspx");
+    }
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+   
+     <script src="scripts/ddaccordion.js" type="text/javascript"></script>
+
+    <script src="scripts/jquery.js" type="text/javascript"></script>
+    
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome to Online Cosultation</title>
+    <!-- Bootstrap CSS -->    
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Normalize Style -->
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <!-- Fonts Awesome -->
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <!-- Color Switcher -->
+    <link rel="stylesheet" href="assets/css/color-switcher.css" type="text/css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="assets/extras/animate.css" type="text/css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="assets/extras/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="assets/extras/owl.theme.css" type="text/css">
+    <!-- Rev Slider Css -->
+    <link rel="stylesheet" href="assets/extras/settings.css" type="text/css">
+    <!-- Nivo Lightbox Css -->
+    <link rel="stylesheet" href="assets/extras/nivo-lightbox.css" type="text/css">
+    <!-- Slicknav Css -->
+    <link rel="stylesheet" href="assets/css/slicknav.css" type="text/css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Color CSS Styles  -->
+    <link rel="stylesheet" type="text/css" href="assets/css/colors/blue.css" media="screen" />
+    <link href="Styles/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/menu_css.css" rel="Stylesheet" type="text/css" />
+       </head>
+    <body> <form id="form1" runat="server"><asp:ScriptManager ID="scriptManager" runat="server">                                </asp:ScriptManager>
+   
+    <!-- Header area wrapper Starts -->
+    <header id="header-wrap">
+      <!-- Roof area Starts -->
+      <div id="roof" class="hidden-xs">
+          <div class="container">
+              <!-- Wellcome Starts -->
+              <div class="pull-left">
+                
+              </div>
+              <!-- Wellcome End -->
+
+              <!-- Quick Contacts Starts -->
+              <div class="quick-contacts pull-right">
+                  
+                  <span><uc1:TitlesDisplay ID="TitlesDisplay1" runat="server" /> &nbsp;&nbsp;<asp:LinkButton 
+                      ID="LinkButton11" runat="server" Font-Bold="True" 
+                      onclick="LinkButton1_Click">Logout</asp:LinkButton> </span>
+              </div>
+              <!-- Quick Contacts End -->
+          </div>
+      </div>
+      <!-- Roof area End -->
+
+      <!-- Navbar Start -->
+      <nav class="navbar navbar-default main-navigation" role="navigation" data-spy="affix" data-offset-top="50">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="BankRequests.aspx"><img src="assets/img/logo.png" alt=""></a>
+            </div>
+            <!-- Brand End -->
+
+            <!-- Search Icon -->
+            
+            <!-- Collapse Navbar -->
+            <%
+                                                    if (Session["LoginType"].ToString() == "user")
+                                                    {
+                                                %>
+            <div class="collapse navbar-collapse" id="navbar">
+              <ul class="nav navbar-nav navbar-right">
+                 <li class="dropdown dropdown-toggle">
+                  <a  href="dashboard.aspx" >Home</a>
+                </li>
+                <li class="dropdown dropdown-toggle">
+                   <a href="Application1.aspx">Application</a>
+                </li>
+                 
+                <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Payments<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                   <li><a href="PayoutInfo.aspx">Passbook</a></li>               
+                 <li><a href="BankDepositRequest2.aspx">Payment Request</a></li>
+                  
+                  </ul>                        
+                </li> 
+                <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">E-Pins<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="PinsBuy.aspx">Pin Purchase</a></li>
+                     <li><a href="ViewPins.aspx">View Pins</a></li>
+ 
+                  </ul>                        
+                </li>              
+                  <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Profile<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="Profile.aspx">Profile</a></li>
+                    <li><a href="Bankdetails.aspx">Bank Details</a></li>
+                     <li><a href="ConfirmDisplay.aspx">Welcome Letter</a></li>
+<li><a href="ChangePassword.aspx">Change Password</a></li>
+                                                    <li><a href="ChangeTransactionPassword.aspx">Change Tran. PWD</a></li>
+
+                  </ul>                        
+                </li>  
+         </ul>
+            </div>
+
+            <!-- Mobile Menu Start -->
+            <ul class="wpb-mobile-menu">
+                <li class="dropdown dropdown-toggle">
+                  <a class="active" href="dashboard.aspx" data-toggle="dropdown">Home</a>
+                </li>
+                <li class="dropdown dropdown-toggle">
+                   <a href="Application.aspx">Application</a>
+                </li>
+                
+                <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Payments<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                   <li><a href="PayoutInfo.aspx">Passbook</a></li>               
+                 <li><a href="BankDepositRequest2.aspx">Payment Request</a></li>
+                  
+                  </ul>                        
+                </li> 
+                <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">E-Pins<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="PinsBuy.aspx">Pin Purchase</a></li>
+                     <li><a href="ViewPins.aspx">View Pins</a></li>
+  
+                  </ul>                        
+                </li>              
+                  <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Profile<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="Profile.aspx">Profile</a></li>
+                     <li><a href="ConfirmDisplay.aspx">Welcome Letter</a></li>
+                     <li><a href="ChangePassword.aspx">Change Password</a></li>
+                                                    <li><a href="ChangeTransactionPassword.aspx">Change Tran. PWD</a></li>
+
+                  </ul>                        
+                </li>  
+          
+            </ul>
+            <!-- Mobile Menu End -->
+            <%}
+                                                    else if (Session["LoginType"].ToString() == "admin")
+                                                    { %>
+                                                    <div class="collapse navbar-collapse" id="Div1">
+              <ul class="nav navbar-nav navbar-right">
+                 <li class="dropdown dropdown-toggle">
+                  <a class="active" href="BankRequests.aspx" data-toggle="dropdown">Home</a>
+                </li>
+                <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Data<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    
+                    <li><a href="DisesesInfo.aspx">Diseses Info</a></li>
+                     <li><a href="DoctorsInfo.aspx">Doctors Info</a></li>
+                    <li><a href="DoctorsTimingsDetails.aspx">Doctors Timings Details</a></li>
+                     <li><a href="TestimonialsDetails.aspx">Testimonials Details</a></li>
+                   </ul>                        
+                </li>
+                 
+                  
+                            
+                  <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Reports<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="Viewusersdetails.aspx">View Users Details</a></li>
+                  
+                     <li><a href="ViewBookingHistory.aspx">View Booking History</a></li>
+                      <li><a href="DeletdHistory.aspx">View Cancelled History</a></li>
+                  
+                  </ul>                        
+                </li>                  	
+ <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown"> Admin Password<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="ChangePassword.aspx">Change Password</a></li>
+
+                  </ul>                        
+                </li>  
+
+
+         </ul>
+            </div>
+
+            <!-- Mobile Menu Start -->
+            <ul class="wpb-mobile-menu">
+                <li class="dropdown dropdown-toggle">
+                  <a class="active" href="Admin/BankRequests.aspx" data-toggle="dropdown">Home</a>
+                </li>
+                <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Members<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">                    
+                    <li><a href="ApplicationsInfo.aspx">Applications Info</a></li>
+                    <li><a href="movetoboard.aspx">Move to pool</a></li>
+                    <li><a href="Update.aspx">Update Member Details</a></li>
+                    <li><a href="UpdatedList.aspx">Updated Member List</a></li>
+                   </ul>                        
+                </li>
+                <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Payouts<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                   <li><a href="CSwithMaster.aspx">View Payouts</a></li> 	
+                   <li><a href="BankRequests.aspx">View Deposit Requests</a></li>
+                 <li><a href="BankRequestsApproved.aspx">Deposit Requests Approval</a></li>
+
+                  </ul>                        
+                </li> 
+                <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown">Income<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                  <li><a href="royaltyincome.aspx">Royalty Income</a></li><li><a href="refroyaltyincome.aspx">Ref. Royalty Income</a></li>
+                   <li><a href="AdminFundsTransfer.aspx">Fund Transfer</a></li>
+                   
+                  </ul>                        
+                </li>  
+                      
+                              	
+ <li class="dropdown dropdown-toggle">
+                  <a href="#" data-toggle="dropdown"> E-Pins<i class="fa fa-angle-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="PinTypeList.aspx">View Pin type list</a></li>
+
+                  </ul>                        
+                </li>  
+
+
+          
+            </ul>
+                                                    <%} %>
+          </div>
+      </nav>
+      <!-- Navbar End -->
+
+    </header>
+
+    
+    
+
+                               
+  <section id="content" class="error-bg">
+      <div class="container">
+        <asp:ContentPlaceHolder runat="server" ID="conten1">
+         </asp:ContentPlaceHolder>
+</div>
+    </section>
+   
+    </form>
+    <footer>
+      <!-- Container Starts -->
+      <div class="container">
+        <!-- Row Starts -->
+        <div class="row">
+          
+        </div><!-- Row Ends -->
+      </div><!-- Container Ends -->
+      
+      <!-- Copyright -->
+      <div id="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6  col-sm-6">
+              <p class="copyright-text">
+                &copy;All rights reserved 2022 - Online Cosultation
+              </p>
+            </div>
+            <div class="col-md-6  col-sm-6">                
+              <div class="bottom-social-icons pull-right">  
+                <a class="facebook" target="_blank" href="https://web.facebook.com/GrayGrids"><i class="fa fa-facebook"></i></a> 
+                <a class="twitter" target="_blank" href="https://twitter.com/GrayGrids"><i class="fa fa-twitter"></i></a>
+                <a class="google-plus" target="_blank" href="https://plus.google.com"><i class="fa fa-google-plus"></i></a>
+                <a class="linkedin" target="_blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a>
+              </div>            
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Copyright  End-->
+      
+    </footer>
+    <!-- Footer Section End-->
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </a>
+
+ 
+
+    <!-- jQuery  -->
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+   
+    <script type="text/javascript" src="assets/js/jquery.mixitup.js"></script>
+    <script type="text/javascript" src="assets/js/wow.js"></script>
+    <script type="text/javascript" src="assets/js/nivo-lightbox.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.countdown.js"></script>  
+    <script type="text/javascript" src="assets/js/jquery.counterup.min.js"></script>   
+    <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script> 
+    <script type="text/javascript" src="assets/js/form-validator.min.js"></script>
+    <script type="text/javascript" src="assets/js/contact-form-script.js"></script>  
+    
+    <script type="text/javascript" src="assets/js/jquery.slicknav.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
+</body>
+</html>
